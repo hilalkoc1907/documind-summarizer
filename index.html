@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DocuMind Summarizer</title>
+    <meta name="description" content="Transform long PDFs into structured visual summaries using AI." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M7 3.5h7l3.5 3.5v13.5H7z"/><path d="M14 3.5V7h3.5M10 12h5M10 15h5M10 18h3"/></svg>
+          </div>
+          <span>DocuMind <strong>Summarizer</strong></span>
+        </div>
+        <button class="new-chat" id="newDocBtn">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          <span>New document</span>
+        </button>
+        <div class="side-section">
+          <div class="section-label">DOCUMENTS</div>
+          <div id="documentList" class="document-list"></div>
+        </div>
+        <div class="sidebar-footer">
+          <div class="profile">
+            <div class="avatar">HK</div>
+            <div class="profile-copy"><strong>Hilal Koç</strong><span>hilal@example.com</span></div>
+            <button class="profile-more" aria-label="Profile menu">•••</button>
+          </div>
+        </div>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 id="documentTitle">Welcome to DocuMind</h1>
+            <p id="documentMeta">Upload a PDF to generate structured visual summaries</p>
+          </div>
+          <div class="top-actions">
+            <button class="icon-button" id="exportBtn" title="Export Summary">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            </button>
+          </div>
+        </header>
+        <section class="workspace" id="workspace">
+          <!-- Empty State -->
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon">
+              <svg viewBox="0 0 48 48"><path d="M14 7h15l7 7v27H14z"/><path d="M29 7v7h7M20 25h10M20 31h10M20 37h6"/></svg>
+            </div>
+            <h2>Transform PDFs into Smart Summaries</h2>
+            <p>Upload any study material, report, or book chapter to instantly<br />generate key insights, structured outlines, and executive notes.</p>
+            <label class="upload-button" for="pdfInput">
+              <svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"/></svg>
+              Upload PDF File
+            </label>
+            <input type="file" id="pdfInput" accept="application/pdf" hidden />
+            <span class="file-note">Supports PDFs up to 25 MB</span>
+          </div>
+
+          <!-- Summary Dashboard State -->
+          <div class="summary-state hidden" id="summaryState">
+            <div class="summary-container">
+              <!-- Executive Summary Card -->
+              <div class="summary-card highlight-card">
+                <h3>📌 Executive Summary / Yönetici Özeti</h3>
+                <p id="execSummaryText">Analyzing text...</p>
+              </div>
+
+              <!-- Key Takeaways Grid -->
+              <div class="section-heading">Key Insights & Takeaways</div>
+              <div class="takeaways-grid" id="takeawaysGrid">
+                <!-- Dynamic cards populated here -->
+              </div>
+
+              <!-- Chapter / Section Outline -->
+              <div class="section-heading" style="margin-top: 32px;">Document Structure & Highlights</div>
+              <div class="outline-box" id="outlineBox">
+                <!-- Dynamic outline items -->
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <div class="toast" id="toast"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
